@@ -3,8 +3,7 @@ package example
 
 import (
 	"context"
-
-	"github.com/urban-go/core/internal/apptracer"
+	"log"
 )
 
 type TestInterfaceWrapper struct {
@@ -21,8 +20,9 @@ func (w *TestInterfaceWrapper) TestMethod(
 	ctx context.Context, slice []int64, testMap map[string]context.Context, points ...string) (
 	[]string, error) {
 	// Start of customize code
-	ctx, span := apptracer.NewSpanFromContext(ctx, "TestInterface.TestMethod")
-	defer span.End()
+
+	log.Println("Custom code here")
+
 	// End of customize code
 
 	return w.inner.TestMethod(ctx, slice, testMap, points...)
@@ -31,8 +31,9 @@ func (w *TestInterfaceWrapper) TestMethod(
 func (w *TestInterfaceWrapper) TestMethod2(
 	ctx context.Context) error {
 	// Start of customize code
-	ctx, span := apptracer.NewSpanFromContext(ctx, "TestInterface.TestMethod2")
-	defer span.End()
+
+	log.Println("Custom code here")
+
 	// End of customize code
 
 	return w.inner.TestMethod2(ctx)
